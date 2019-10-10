@@ -1,0 +1,91 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+    
+   <ui:composition template="../template.xhtml">
+        <ui:define name="corpo">
+
+            <div class="outer" id="outer">  
+            <div class="inner" id="inner">
+                
+                <p:panel  header="Chamado" style="margin-bottom:20px">
+
+                    <p:panelGrid columns="4">
+                        
+                        <p:outputLabel value="Nº Chamado"/>
+                        <p:inputText disabled="true" value="#{chamadoMB.chamado.id}"/>
+                        
+                        <p:outputLabel value="Dt. p/ Atendimento"/>
+                        <p:inputText disabled="true" value="#{chamadoMB.chamado.limiteAtendimento}"/>    
+                    </p:panelGrid>
+
+                    <p:panel header="Abertura" style="margin-bottom:20px">
+                        <p:panelGrid columns="4">
+                            <p:outputLabel value="Solicitante"/>
+                            <p:inputText disabled="true" value="#{chamadoMB.chamado.usuarioAbertura}"/>
+                            
+                            <p:outputLabel value="Data Abertura"/>
+                            <p:inputText disabled="true" value="#{chamadoMB.chamado.dataAbertura}"/>
+
+                            <p:outputLabel value="Tipo Chamado"/>
+                            <p:selectOneMenu value="#{chamadoMB.chamado.tipoChamado}" converter="tipoChamadoConverter">
+                            <f:selectItem itemValue="0" itemLabel="--selecione--"/>
+                            <f:selectItems value="#{chamadoMB.listaTipoChamados}" var="tipoChamado" itemLabel="#{tipoChamado.nome}" itemValue="#{tipoChamado}"/>        
+                            </p:selectOneMenu>
+                            
+                            
+                            
+                            <p:outputLabel value="Equipamento"/>                           
+                            <p:selectOneMenu value="#{chamadoMB.chamado.equipamento}" converter="equipamentoConverter">
+                            <f:selectItem itemValue="0" itemLabel="--selecione--"/>
+                            <f:selectItems value="#{chamadoMB.listaEquipamentos}" var="equipamento" itemLabel="#{equipamento.numeroPatrimonio}" itemValue="#{equipamento}"/>        
+                            </p:selectOneMenu> 
+                            
+                        </p:panelGrid>
+                        <p:panelGrid columns="1">
+                            <p:outputLabel value="Descrição"/>
+                            <p:inputTextarea disabled="false" value="#{chamadoMB.chamado.descricao}" rows="5" cols="87" />
+
+                        </p:panelGrid>
+
+                    </p:panel>
+
+                    <p:panel rendered="#{segurancaMB.isTecnico()}" header="Atendimento" style="margin-bottom:20px">
+                        <p:panelGrid columns="2">
+                            
+                            <p:outputLabel value="Status"/>
+                            <p:inputText disabled="true" value="#{chamadoMB.chamado.status}"/>
+                            
+                            <p:outputLabel value="Tec. Responsável"/>
+                            <p:inputText disabled="true" value="#{chamadoMB.chamado.tecnicoResponsavel}"/>
+
+
+                        </p:panelGrid>
+                        <p:panelGrid columns="1">
+                            <p:outputLabel value="Solução"/>
+                            <p:inputTextarea  disabled="false" value="#{chamadoMB.chamado.solucao}" rows="5" cols="87" />
+                        </p:panelGrid>
+                    </p:panel>
+
+                    <p:panelGrid columns="4">
+                        <p:commandButton value="Gravar" action="#{chamadoMB.gravar()}"/>
+                        <p:commandButton rendered="#{segurancaMB.isTecnico()}" value="Finalizar" action="#{chamadoMB.encerrar()}"/>
+                        
+                    </p:panelGrid>
+
+
+                </p:panel>
+            </div>  
+        </div>
+   
+        
+     </ui:define> 
+
+    </ui:composition>
+    
+</html>
+

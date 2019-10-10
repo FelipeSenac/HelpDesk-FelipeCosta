@@ -1,0 +1,91 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+
+    <f:view>
+        <h:head>
+            <style>
+                .ui-datagrid{border: none !important;}  
+                .ui-datagrid-content {border: none !important;}  
+                .ui-panelgrid tr,
+                .ui-panelgrid td {border: none !important;}   
+
+                .h3 {/*text-align: center; */font-family: serif; color: lightseagreen;} 
+
+                .h1 {font-size: 20px; /*text-align: center;*/ font-family: serif;}
+
+                .fundo{ background-color: dodgerblue;}
+
+                .cabecario{ background-color: dodgerblue;}
+
+            </style>
+            <meta content='text/html; charset=UTF-8' http-equiv="Content-Type"/>
+            <title>Principal</title>
+        </h:head>
+        <h:body >
+
+            <h:form>
+
+                <p:layout fullPage="true">
+
+                    <p:growl id="grow1" showDetail="true" sticky="true"/>
+
+                    <p:layoutUnit class="h1" position="north" resizable="true" closable="true" collapsible="true">
+                        <ui:insert  name="cabecalho">
+                            <h1 class=" fundo">HELP-DESK</h1> 
+                        </ui:insert>     
+                    </p:layoutUnit>
+
+                    <p:layoutUnit class="h3" position="south" size="82" closable="true" collapsible="true">
+                        <ui:insert name="rodape">
+
+                            <h3 class="cabecario"> <h:outputLabel value="Seja bem vindo, #{usuarioMB.usuarioLogado.nome}!"/> </h3>
+
+                        </ui:insert>     
+                    </p:layoutUnit>
+
+                    <p:layoutUnit  position="west" size="250" collapsible="true">
+                        <ui:insert name="esquerda">
+                            <p:menu>
+                                <p:submenu  style="width:220px;" label="MENU">
+
+                                    <p:menuitem rendered="#{segurancaMB.isAdministrador()}" value="Usuário" action="/usuario/listar?faces-redirect=true"/>
+                                    <p:menuitem rendered="#{segurancaMB.isTecnico()}" value="Local" action="/local/listar?faces-redirect=true"/>
+
+                                    <p:menuitem rendered="#{segurancaMB.isTecnico()}" value="Tipo Equipamento" action="/tipoEquipamento/listar?faces-redirect=true"/>
+                                    <p:menuitem rendered="#{segurancaMB.isTecnico()}" value="Tipo Chamado" action="/tipoChamado/listar?faces-redirect=true"/>
+
+                                    <p:menuitem rendered="#{segurancaMB.isTecnico()}" value="Equipamento" action="/equipamento/listar?faces-redirect=true"/>
+                                    <p:menuitem value="Chamado" action="/chamado/listar?faces-redirect=true"/>
+
+                                    <p:menuitem rendered="#{segurancaMB.isTecnico()}" value="Fabricante" action="/fabricante/listar?faces-redirect=true"/>    
+                                    <p:menuitem rendered="#{segurancaMB.isTecnico()}" value="Modelo" action="/modelo/listar?faces-redirect=true"/>
+
+                                    <p:menuitem value="Sair" action="/faces/login.xhtml"/>
+
+                                </p:submenu>
+                            </p:menu>
+                        </ui:insert>     
+                    </p:layoutUnit>
+
+                    <p:layoutUnit position="center">
+                        <ui:insert name="corpo">
+
+
+                            <h1></h1> 
+
+
+                        </ui:insert>     
+                    </p:layoutUnit>
+
+                </p:layout>
+            </h:form>
+        </h:body>
+    </f:view>    
+</html>
+

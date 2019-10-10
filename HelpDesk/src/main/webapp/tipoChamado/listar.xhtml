@@ -1,0 +1,53 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+    
+    <ui:composition template="../template.xhtml">
+        <ui:define name="corpo">
+        
+        <p:panel header="TipoChamado" style="margin-bottom: 20px; background-color: darkgrey">
+
+            <h:form id="tipoChamado">
+
+                <p:dataTable id="tipoChamados" value="#{tipoChamadoMB.listaTipoChamados}" var="tipoChamado">
+                    
+                    <p:column filterBy="#{tipoChamado.id}" style="text-align: center">
+                        <f:facet name="header">ID</f:facet>
+                        <h:outputLabel value="#{tipoChamado.id}"/>                    
+                    </p:column>
+                    
+                    <p:column filterBy="#{tipoChamado.nome}" style="text-align: center">
+                        <f:facet name="header">Nome</f:facet>
+                        <p:inputText value="#{tipoChamado.nome}"/>                    
+                    </p:column>
+
+                    <p:column filterBy="#{tipoChamado.tempoAtendimento}" style="text-align: center"> 
+                        <f:facet name="header">Tempo de Atendimento</f:facet>
+                        <p:inputText value="#{tipoChamado.tempoAtendimento}"/>                    
+                    </p:column>
+
+                    
+                    <p:column style="text-align: center">
+                        <f:facet name="header">Ações</f:facet>
+                        <p:commandButton ajax="false" update="tipoChamados" value="excluir" action="#{tipoChamadoMB.excluir(tipoChamado)}"/>                    
+                    </p:column>
+
+
+                </p:dataTable>
+
+                <p:commandButton update="tipoChamados" ajax="false" value="Novo" action="#{tipoChamadoMB.novo()}"/>
+                <p:commandButton update="tipoChamados" ajax="false" value="Salvar" action="#{tipoChamadoMB.salvar()}"/>
+
+            </h:form>
+
+        </p:panel>         
+
+  
+     </ui:define> 
+    </ui:composition>
+</html>
+

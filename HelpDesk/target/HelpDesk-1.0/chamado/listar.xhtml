@@ -1,0 +1,104 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+
+    <ui:composition template="../template.xhtml">
+        <ui:define name="corpo">
+            
+            <h:form id="chamado"> <!-- id="formPessoas" -->
+
+                <p:panel id="abertos" header="Chamados Abertos" style="margin-bottom:20px; background-color: darkgrey">
+                    
+                    <p:dataTable id="chamados" value="#{chamadoMB.listaChamadosAberto}" var="chamado">
+                        <p:column filterBy="#{chamado.id}" style="text-align: center">
+                        <f:facet name="header">Nº Chamado</f:facet>
+                        <h:outputLabel value="#{chamado.id}"/>                    
+                    </p:column>
+                        
+                        <p:column filterBy="#{chamado.status}" style="text-align: center">
+                        <f:facet name="header">Status</f:facet>
+                        <h:outputLabel value="#{chamado.status.toString()}"/>                    
+                    </p:column>    
+                    
+                    <p:column filterBy="#{chamado.usuarioAbertura}" style="text-align: center">
+                        <f:facet name="header">Usuário</f:facet>
+                        <h:outputLabel value="#{chamado.usuarioAbertura.nome}"/>                    
+                    </p:column>
+                        
+                    <p:column filterBy="#{chamado.tecnicoResponsavel}" style="text-align: center">
+                        <f:facet name="header">Técnico</f:facet>
+                        <h:outputLabel rendered="#{segurancaMB.isTecnico()}" value="#{chamado.tecnicoResponsavel.nome}"/>                    
+                    </p:column>
+                        
+                    <p:column filterBy="#{chamado.tipoChamado}" style="text-align: center">
+                        <f:facet name="header">Tipo Chamado</f:facet>
+                        <h:outputLabel value="#{chamado.tipoChamado.nome}"/>                    
+                    </p:column> 
+                        
+                    <p:column filterBy="#{chamado.limiteAtendimento}" style="text-align: center">
+                        <f:facet name="header">Dt. Atendimento</f:facet>
+                        <h:outputLabel value="#{chamado.limiteAtendimento}"/>                    
+                    </p:column> 
+                        
+                    <p:column>
+                         <f:facet name="header">Ações</f:facet>
+                         <p:commandButton rendered="#{segurancaMB.isTecnico()}" value="Atender" action="#{chamadoMB.atender(chamado)}"/>
+                         
+                         <p:commandButton rendered="#{chamadoMB.dono(chamado)}" value="editar" action="#{chamadoMB.editar(chamado)}"/>
+                         
+                    </p:column>    
+                    
+                  </p:dataTable>
+                    
+                    <h:commandButton value="Abrir Chamado" action="#{chamadoMB.novoChamado()}"/>
+                    
+                </p:panel>
+                
+                
+                <br/>
+                
+              
+                <p:panel id="fechados" header="Chamados Fechados" style="margin-bottom:20px">
+                    
+                    
+                    <p:dataTable id="chamados1" value="#{chamadoMB.listaChamadosFechado}" var="chamado">
+                        <p:column filterBy="#{chamado.id}" style="text-align: center">
+                        <f:facet name="header">Nº Chamado</f:facet>
+                        <h:outputLabel value="#{chamado.id}"/>                    
+                    </p:column>
+                    
+                    <p:column filterBy="#{chamado.usuarioAbertura}" style="text-align: center">
+                        <f:facet name="header">Usuário</f:facet>
+                        <h:outputLabel value="#{chamado.usuarioAbertura.nome}"/>                    
+                    </p:column>
+                        
+                    <p:column filterBy="#{chamado.tecnicoResponsavel}" style="text-align: center">
+                        <f:facet name="header">Técnico</f:facet>
+                        <h:outputLabel value="#{chamado.tecnicoResponsavel.nome}"/>                    
+                    </p:column>
+                        
+                    <p:column filterBy="#{chamado.tipoChamado}" style="text-align: center">
+                        <f:facet name="header">Tipo Chamado</f:facet>
+                        <h:outputLabel value="#{chamado.tipoChamado.nome}"/>                    
+                    </p:column> 
+                 
+                    
+                    </p:dataTable> 
+      
+                    
+                </p:panel>
+                
+               
+                
+            </h:form>
+            
+            
+        </ui:define> 
+
+    </ui:composition>
+</html>
+

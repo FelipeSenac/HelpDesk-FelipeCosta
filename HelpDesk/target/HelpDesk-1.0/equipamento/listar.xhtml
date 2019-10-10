@@ -1,0 +1,83 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+    
+    
+    <ui:composition template="../template.xhtml">
+        <ui:define name="corpo">
+    
+            
+        <p:panel header="Equipamento" style="margin-bottom: 20px; background-color: darkgrey">
+
+            <h:form id="equipamento">
+
+                <p:dataTable id="equipamentos" value="#{equipamentoMB.listaEquipamentos}" var="equipamento">
+                    <p:column width="110" filterBy="#{equipamento.id}" style="text-align: center">
+                        <f:facet name="header">ID</f:facet>
+                        <h:outputLabel value="#{equipamento.id}"/>                    
+                    </p:column>
+
+                    <p:column width="110"  filterBy="#{equipamento.fabricante}" style="text-align: center"> 
+                        <f:facet name="header">Fabricante</f:facet>
+                        <h:outputLabel value="#{equipamento.fabricante.nome}"/>                    
+                    </p:column>
+                    
+                    <p:column filterBy="#{equipamento.tipoEquipamento}" style="text-align: center"> 
+                        <f:facet name="header">Tipo Equipamento</f:facet>
+                        <h:outputLabel value="#{equipamento.tipoEquipamento}"/>                    
+                    </p:column>
+
+                    <p:column width="120" filterBy="#{equipamento.modelo}" style="text-align: center">
+                        <f:facet name="header">Modelo</f:facet>
+                        <h:outputLabel value="#{equipamento.modelo.nome}"/>                    
+                    </p:column>
+                    
+                    <p:column width="120" filterBy="#{equipamento.localInstalacao}" style="text-align: center">
+                        <f:facet name="header">Local Instalação</f:facet>
+                        <h:outputLabel value="#{equipamento.localInstalacao.nome}"/>                    
+                    </p:column>
+                    
+                    <p:column width="120" filterBy="#{equipamento.numeroPatrimonio}" style="text-align: center">
+                        <f:facet name="header">Nº Patrimonio</f:facet>
+                        <h:outputLabel value="#{equipamento.numeroPatrimonio}"/>                    
+                    </p:column>
+                    
+                    <p:column width="120"  filterBy="#{equipamento.dtFimGarantia}" style="text-align: center">
+                        <f:facet name="header">Data Garantia</f:facet>
+                        <h:outputLabel value="#{equipamento.dtFimGarantia}"/>                    
+                    </p:column>
+                    
+                    <p:column filterBy="#{equipamento.dadosComplementares}" style="text-align: center">
+                        <f:facet name="header">Dados Complementares</f:facet>
+                        <h:outputLabel value="#{equipamento.dadosComplementares}"/>                    
+                    </p:column>
+                    
+                    <p:column width="120" filterBy="#{equipamento.observacao}" style="text-align: center">
+                        <f:facet name="header">Observação</f:facet>
+                        <h:outputLabel value="#{equipamento.observacao}"/>                    
+                    </p:column>
+                   
+                    
+                    
+                    <p:column>
+                        <p:commandButton value="editar" action="#{equipamentoMB.editar(equipamento)}"/>
+                        <p:commandButton update="equipamentos" ajax="false" value="excluir" action="#{equipamentoMB.excluir(equipamento)}"/>
+                </p:column>
+
+
+                </p:dataTable>
+
+                <h:commandButton value="Novo Equipamento" action="#{equipamentoMB.novoEquipamento()}"/>
+
+            </h:form>
+
+        </p:panel>         
+     
+    </ui:define> 
+    </ui:composition>
+</html>
+

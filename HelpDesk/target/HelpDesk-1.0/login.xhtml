@@ -1,0 +1,36 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" 
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>HelpDesk</title>
+        <link href="#{facesContext.externalContext.requestContextPath}/recursos/css/appestilo.css" 
+              rel="stylesheet" type="text/css"/>
+
+    </h:head>
+    <h:body >
+
+        <div class="container">
+            <div class="box">
+                <p:graphicImage value ="/recursos/midia/help.jpg" 
+                                style="border-top-right-radius: 44px; border-top-left-radius: 44px"/>  
+                            
+                <h:form  id="formLogin">
+                    <h:panelGrid  cellspacing="10">
+                            <p:outputLabel style="text-align: center" value="Faça login para abertura de chamado!"/>                   
+                            <p:messages id="messagesLogin"/>
+                            <p:inputMask style="text-align: center" mask="999.999.999-99" placeholder="Insira seu CPF" 
+                                         value="#{segurancaMB.login}" size="24" required="true" requiredMessage="Campo CPF é obrigatório"/>
+                            
+                            <p:password style="text-align: center" placeholder="Insira sua Senha" value="#{segurancaMB.senha}"  
+                                        size="24" required="true" requiredMessage="Campo senha é obrigatório"/>
+                            <p:commandButton value="Entrar" action="#{segurancaMB.logar()}" update="messagesLogin"/>
+                    </h:panelGrid>
+                </h:form>
+                
+            </div>   
+        </div>   
+    </h:body>
+</html>
+

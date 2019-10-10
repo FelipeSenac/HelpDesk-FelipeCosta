@@ -1,0 +1,20 @@
+.container {
+      width: 100vw;
+      height: 100vh;
+      background: dodgerblue;
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+  
+  }
+  .box {
+      width: 288px;
+      height: 400px;
+      background: lightseagreen;   
+      border-radius: 44px;
+  }
+  
+  body {
+      margin: 0px;
+  }

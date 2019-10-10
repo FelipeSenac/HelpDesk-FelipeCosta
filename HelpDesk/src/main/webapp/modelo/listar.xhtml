@@ -1,0 +1,59 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+    
+    
+    <ui:composition template="../template.xhtml">
+        <ui:define name="corpo">
+        
+       <p:panel header="Modelo" style="margin-bottom: 20px; background-color: darkgrey">
+
+            <h:form id="modelo">
+
+                <p:dataTable id="modelos" value="#{modeloMB.listaModelos}" var="modelo">
+                    
+                    <p:column filterBy="#{modelo.id}" style="text-align: center">
+                        <f:facet name="header">ID</f:facet>
+                        <h:outputLabel value="#{modelo.id}"/>                    
+                    </p:column>
+
+                    <p:column filterBy="#{modelo.nome}" style="text-align: center"> 
+                        <f:facet name="header">Nome</f:facet>
+                        <p:inputText value="#{modelo.nome}"/>                    
+                    </p:column>
+                    
+                    <p:column filterBy="#{modelo.fabricante}" style="text-align: center"> 
+                        <f:facet name="header">Fabricante</f:facet>
+                        
+                        <p:selectOneMenu value="#{modelo.fabricante}" converter="fabricanteConverter">
+                            <f:selectItem itemValue="0" itemLabel="--selecione--"/>
+                            <f:selectItems value="#{modeloMB.listaFabricante}" var="fabricante" itemLabel="#{fabricante.nome}" itemValue="#{fabricante}"/>
+                            
+                    </p:selectOneMenu>                          
+                    </p:column>
+
+                    <p:column style="text-align: center">
+                        <f:facet name="header">Ações</f:facet>
+                        <p:commandButton ajax="false" update="modelos" value="excluir" action="#{modeloMB.excluir(modelo)}"/>                    
+                    </p:column>
+
+
+                </p:dataTable>
+
+                <p:commandButton update="modelos" ajax="false" value="Novo" action="#{modeloMB.novo()}"/>
+                <p:commandButton update="modelos" ajax="false" value="Salvar" action="#{modeloMB.salvar()}"/>
+
+            </h:form>
+
+        </p:panel>         
+
+
+    </ui:define> 
+    </ui:composition>
+    
+</html>
+

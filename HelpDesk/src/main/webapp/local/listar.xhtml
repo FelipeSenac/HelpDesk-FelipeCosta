@@ -1,0 +1,54 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+    
+    <ui:composition template="../template.xhtml">
+        <ui:define name="corpo">
+        
+        <p:panel header="Local" style="margin-bottom: 20px; background-color: darkgrey">
+
+            <h:form id="tipoLocal"> 
+
+                <p:dataTable id="tipoLocals" value="#{localMB.listaLocals}" var="local">
+                    
+                    <p:column filterBy="#{local.id}" style="text-align: center">
+                        <f:facet name="header">ID</f:facet>
+                        <h:outputLabel value="#{local.id}"/>                    
+                    </p:column>
+                    
+                    <p:column filterBy="#{local.nome}" style="text-align: center">
+                        <f:facet name="header">Nome</f:facet>
+                        <h:outputLabel value="#{local.nome}"/>                    
+                    </p:column>
+
+                    <p:column filterBy="#{local.sigla}" style="text-align: center"> 
+                        <f:facet name="header">Sigla</f:facet>
+                        <h:outputLabel value="#{local.sigla}"/>                    
+                    </p:column>
+
+                    
+                    <p:column style="text-align: center">
+                        <f:facet name="header">Ações</f:facet>
+                        <p:commandButton ajax="false" update="tipoLocal" value="excluir" action="#{localMB.excluir(local)}"/>   
+                        <p:commandButton ajax="false" update="tipoLocal" value="editar" action="#{localMB.editar(local)}"/>   
+                    </p:column>
+
+
+                </p:dataTable>
+
+                <p:commandButton update="tipoLocal" ajax="false" value="Novo" action="#{localMB.novaLocal()}"/>
+                <p:commandButton update="tipoLocal" ajax="false" value="Salvar" action="#{localMB.salvar()}"/>
+
+            </h:form>
+
+        </p:panel>         
+
+    </ui:define> 
+    </ui:composition> 
+    
+</html>
+

@@ -1,0 +1,72 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+    
+   <ui:composition template="../template.xhtml">
+        <ui:define name="corpo">
+        
+        <p:panel header="Usuário" style="margin-bottom: 20px; background-color: darkgrey">
+
+            <h:form id="usuario">
+
+                <p:dataTable id="usuarios" value="#{usuarioMB.listaUsuarios}" var="usuario">
+                    <p:column filterBy="#{usuario.id}" style="text-align: center">
+                        <f:facet name="header">ID</f:facet>
+                        <h:outputLabel value="#{usuario.id}"/>                    
+                    </p:column>
+
+                    <p:column filterBy="#{usuario.nome}" style="text-align: center"> 
+                        <f:facet name="header">Nome</f:facet>
+                        <h:outputLabel value="#{usuario.nome}"/>                    
+                    </p:column>
+                    
+                    <p:column filterBy="#{usuario.cpf}" style="text-align: center"> 
+                        <f:facet name="header">Cpf</f:facet>
+                        <h:outputLabel value="#{usuario.cpf}"/>                    
+                    </p:column>
+
+                    <p:column filterBy="#{usuario.telefone}" style="text-align: center">
+                        <f:facet name="header">Telefone</f:facet>
+                        <h:outputLabel value="#{usuario.telefone}"/>                    
+                    </p:column>
+                    
+                    <p:column filterBy="#{usuario.setorTrabalho}" style="text-align: center">
+                        <f:facet name="header">Setor de Trabalho</f:facet>
+                        <h:outputLabel value="#{usuario.setorTrabalho.nome}"/>                    
+                    </p:column>
+                    
+                    <p:column filterBy="#{usuario.email}" style="text-align: center">
+                        <f:facet name="header">E-mail</f:facet>
+                        <h:outputLabel value="#{usuario.email}"/>                    
+                    </p:column>
+                    
+                    <p:column  width="120" filterBy="#{usuario.perfil}" style="text-align: center">
+                        <f:facet name="header">Perfil</f:facet>
+                        <h:outputLabel value="#{usuario.perfil}"/>                    
+                    </p:column>
+                   
+                  
+                    
+                    <p:column>
+                        <p:commandButton value="editar" action="#{usuarioMB.editar(usuario)}"/>
+                        <p:commandButton update="usuarios" ajax="false" value="excluir" action="#{usuarioMB.excluir(usuario)}"/>
+                </p:column>
+
+
+                </p:dataTable>
+
+                <h:commandButton value="Novo Usuário" action="#{usuarioMB.novoUsuario()}"/>
+
+            </h:form>
+
+        </p:panel>         
+    
+      </ui:define> 
+    </ui:composition>
+
+</html>
+
